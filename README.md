@@ -1,2 +1,2 @@
 ### Install
-### implementation 'com.github.alirezaseilsepor:FilePickerDialog:1.0.2'
+### implementation 'com.github.alirezaseilsepor:FilePickerDialog:1.0.3'
