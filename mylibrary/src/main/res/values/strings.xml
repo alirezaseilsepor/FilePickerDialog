@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cancel">Cancel</string>
+    <string name="crop">crop</string>
+    <string name="ok">OK</string>
+    <string name="permission_request_title">Core fundamental are based on these permissions</string>
+    <string name="permission_forward_setting">You need to allow necessary permissions in Settings manually</string>
+    <string name="recent">recent</string>
+    <string name="select">Select</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cancel">لغو</string>
+    <string name="crop">بریدن</string>
+    <string name="ok">باشه</string>
+    <string name="permission_request_title">بنیادی اصلی بر اساس این مجوزها است</string>
+    <string name="permission_forward_setting">باید مجوزهای لازم را در تنظیمات به صورت دستی مجاز کنید</string>
+    <string name="recent">اخیر</string>
+    <string name="select">انتخاب</string>
+</resources>

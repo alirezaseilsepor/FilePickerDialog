@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9F9F9"
+    android:layoutDirection="ltr"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pnl_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSpinnerFolder"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:padding="14dp"
+            android:tint="#000"
+            android:background="#F9F9F9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_arrow_down" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinnerFolder"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#F9F9F9"
+            android:layoutDirection="ltr"
+            app:layout_constraintStart_toEndOf="@id/ivSpinnerFolder" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirm"
+            app:backgroundTint="@color/selector_bg_material_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            app:cornerRadius="24dp"
+            android:enabled="false"
+            android:textColor="#fff"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:text="@string/select"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:background="#F1F1F1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        tools:listitem="@layout/item_media"
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="80dp"
+        tools:itemCount="55"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/pnl_action_bar"
+        app:spanCount="3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
