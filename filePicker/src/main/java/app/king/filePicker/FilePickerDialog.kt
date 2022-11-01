@@ -25,7 +25,6 @@ import app.king.mylibrary.ktx.safeDismiss
 import app.king.mylibrary.ktx.setOnSafeClickListener
 import coil.load
 import com.canhub.cropper.CropImageContractOptions
-import com.canhub.cropper.CropImageOptions
 import com.permissionx.guolindev.PermissionX
 import com.stfalcon.imageviewer.StfalconImageViewer
 import kotlinx.coroutines.Dispatchers
@@ -40,7 +39,7 @@ import java.nio.file.Paths
 import java.util.*
 import kotlin.math.roundToInt
 
-class PickMediaBottomSheetDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>() {
+class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>() {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> DialogMediaPickBinding
         get() = DialogMediaPickBinding::inflate
@@ -55,7 +54,7 @@ class PickMediaBottomSheetDialog : BaseBottomSheetDialogFragment<DialogMediaPick
     var isCompress = false
     var compressQuality = 70
     var isEnableCrop = false
-    var cropImageOptions: CropImageOptions = CropImageOptions()
+    var cropImageOptions: CropOptions = CropOptions()
 
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
@@ -401,6 +400,87 @@ class PickMediaBottomSheetDialog : BaseBottomSheetDialogFragment<DialogMediaPick
         super.onCancel(dialog)
         onCancelListener?.invoke()
     }
+
+
+
+
+    class Builder() {
+        constructor(init: Builder.() -> Unit) : this() {
+            init()
+        }
+
+        private var onMultiSelectFileListener: Click<ArrayList<ResultMedia>>? = null
+        private var onSingleSelectFileListener: Click<ResultMedia>? = null
+        private var onCancelListener: SimpleClick? = null
+        private var isMultiSelect = false
+        private var compressQuality = 70
+        private var isCompress = false
+        private var isEnableCrop = false
+        private var cropImageOptions : CropOptions = CropOptions()
+
+
+        fun setSingleSelectListener(listener: Click<ResultMedia>?): Builder {
+            this.onSingleSelectFileListener = listener
+            return this
+        }
+
+        fun setMultiSelectListener(listener: Click<ArrayList<ResultMedia>>?): Builder {
+            this.onMultiSelectFileListener = listener
+            return this
+        }
+
+
+        fun setMultiSelect(isMultiSelect: Boolean): Builder {
+            this.isMultiSelect = isMultiSelect
+            return this
+        }
+
+        fun setCompress(compress: Boolean, compressQuality: Int): Builder {
+            this.compressQuality = compressQuality
+            this.isCompress = compress
+            return this
+        }
+
+        fun setEnableCrop(
+            isEnableCrop: Boolean,
+            builder: CropOptions.() -> (Unit) = {},
+        ): Builder {
+            this.isEnableCrop = isEnableCrop
+            val option = CropOptions()
+            option.run(builder)
+            this.cropImageOptions = option
+            return this
+        }
+
+        fun setEnableCrop(
+            isEnableCrop: Boolean,
+            cropImageOptions: CropOptions,
+        ): Builder {
+            this.isEnableCrop = isEnableCrop
+            this.cropImageOptions = cropImageOptions
+            return this
+        }
+
+        fun build(): FilePickerDialog {
+            val filePickerDialog = FilePickerDialog()
+            filePickerDialog.isMultiSelect = isMultiSelect
+            filePickerDialog.isCompress = isCompress
+            filePickerDialog.compressQuality = compressQuality
+            filePickerDialog.isEnableCrop = isEnableCrop
+            filePickerDialog.cropImageOptions = cropImageOptions
+            filePickerDialog.onSelectFileListener = {
+                onMultiSelectFileListener?.invoke(it)
+                onSingleSelectFileListener?.invoke(it.first())
+                filePickerDialog.safeDismiss()
+            }
+            filePickerDialog.onCancelListener = {
+                onCancelListener?.invoke()
+            }
+            return filePickerDialog
+        }
+
+    }
+
 }
 
 
