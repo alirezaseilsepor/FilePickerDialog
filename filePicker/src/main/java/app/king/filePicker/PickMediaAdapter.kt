@@ -1,4 +1,4 @@
-package app.king.mylibrary
+package app.king.filePicker
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import app.king.mylibrary.databinding.ItemCameraBinding
-import app.king.mylibrary.databinding.ItemMediaBinding
-
+import app.king.filePicker.databinding.ItemCameraBinding
+import app.king.filePicker.databinding.ItemMediaBinding
 import app.king.mylibrary.ktx.Click2
 import app.king.mylibrary.ktx.SimpleClick
 import app.king.mylibrary.ktx.setOnSafeClickListener
+
+
 import coil.load
 import java.io.File
 

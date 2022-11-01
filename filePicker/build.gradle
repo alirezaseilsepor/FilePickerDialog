@@ -38,8 +38,8 @@ android {
 
 dependencies {
 
-    api 'com.github.alirezaseilsepor:ImageViewer:1.0.5'
-    api 'com.github.alirezaseilsepor:MyUtils:1.0.3'
+    implementation 'com.github.alirezaseilsepor:MyUtils:1.0.3'
+    implementation 'com.github.alirezaseilsepor:ImageViewer:1.0.5'
 
     implementation 'androidx.core:core-ktx:1.9.0-alpha05'
     implementation 'androidx.appcompat:appcompat:1.6.0-alpha05'
@@ -65,7 +65,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'app.king.filepickerdialog'
                 artifactId = 'FilePickerDialog'
-                version = '1.0.3'
+                version = '1.0.4'
             }
         }
     }

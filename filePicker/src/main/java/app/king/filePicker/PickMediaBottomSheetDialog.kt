@@ -1,4 +1,4 @@
-package app.king.mylibrary
+package app.king.filePicker
 
 import android.Manifest
 import android.content.ContentUris
@@ -17,7 +17,7 @@ import androidx.core.content.FileProvider
 import androidx.core.database.getLongOrNull
 import androidx.core.database.getStringOrNull
 import androidx.lifecycle.lifecycleScope
-import app.king.mylibrary.databinding.DialogMediaPickBinding
+import app.king.filePicker.databinding.DialogMediaPickBinding
 import app.king.mylibrary.date.GeneralCalendar
 import app.king.mylibrary.ktx.Click
 import app.king.mylibrary.ktx.SimpleClick

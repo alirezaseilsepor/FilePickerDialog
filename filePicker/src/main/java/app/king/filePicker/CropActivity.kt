@@ -1,4 +1,4 @@
-package app.king.mylibrary
+package app.king.filePicker
 
 import android.content.Intent
 import android.net.Uri
@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
-import app.king.mylibrary.databinding.ActivityCropBinding
+import app.king.filePicker.databinding.ActivityCropBinding
 import com.canhub.cropper.CropImage
 import com.canhub.cropper.CropImageOptions
 import com.canhub.cropper.CropImageView
