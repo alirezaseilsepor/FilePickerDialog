@@ -38,8 +38,8 @@ android {
 
 dependencies {
 
-    implementation 'com.github.alirezaseilsepor:ImageViewer:1.0.5'
-    implementation 'com.github.alirezaseilsepor:MyUtils:1.0.3'
+    compileOnly 'com.github.alirezaseilsepor:ImageViewer:1.0.5'
+    compileOnly 'com.github.alirezaseilsepor:MyUtils:1.0.3'
 
     implementation 'androidx.core:core-ktx:1.9.0-alpha05'
     implementation 'androidx.appcompat:appcompat:1.6.0-alpha05'
