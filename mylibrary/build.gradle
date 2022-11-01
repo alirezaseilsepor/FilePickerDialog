@@ -65,7 +65,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'app.king.filepickerdialog'
                 artifactId = 'FilePickerDialog'
-                version = '1.0.1'
+                version = '1.0.2'
             }
         }
     }
