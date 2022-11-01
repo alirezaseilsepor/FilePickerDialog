@@ -25,6 +25,7 @@ import app.king.mylibrary.ktx.safeDismiss
 import app.king.mylibrary.ktx.setOnSafeClickListener
 import coil.load
 import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
 import com.permissionx.guolindev.PermissionX
 import com.stfalcon.imageviewer.StfalconImageViewer
 import kotlinx.coroutines.Dispatchers
@@ -54,7 +55,7 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
     var isCompress = false
     var compressQuality = 70
     var isEnableCrop = false
-    var cropImageOptions: CropOptions = CropOptions()
+    var cropImageOptions: CropImageOptions = CropImageOptions()
 
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
@@ -416,7 +417,7 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
         private var compressQuality = 70
         private var isCompress = false
         private var isEnableCrop = false
-        private var cropImageOptions : CropOptions = CropOptions()
+        private var cropImageOptions : CropImageOptions = CropImageOptions()
 
 
         fun setSingleSelectListener(listener: Click<ResultMedia>?): Builder {
@@ -443,10 +444,10 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
 
         fun setEnableCrop(
             isEnableCrop: Boolean,
-            builder: CropOptions.() -> (Unit) = {},
+            builder: CropImageOptions.() -> (Unit) = {},
         ): Builder {
             this.isEnableCrop = isEnableCrop
-            val option = CropOptions()
+            val option = CropImageOptions()
             option.run(builder)
             this.cropImageOptions = option
             return this
@@ -454,7 +455,7 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
 
         fun setEnableCrop(
             isEnableCrop: Boolean,
-            cropImageOptions: CropOptions,
+            cropImageOptions: CropImageOptions,
         ): Builder {
             this.isEnableCrop = isEnableCrop
             this.cropImageOptions = cropImageOptions
