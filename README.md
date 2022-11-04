@@ -1,2 +1,2 @@
 ### Install
-### implementation 'com.github.alirezaseilsepor:FilePickerDialog:1.0.6'
+### implementation 'ir.king-app:FilePickerDialog:1.0.7'
