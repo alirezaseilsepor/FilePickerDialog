@@ -27,6 +27,7 @@ class PickMediaAdapter : BaseListAdapter<ResultMedia, RecyclerView.ViewHolder>(D
     var onClickCameraListener: SimpleClick? = null
     var onSelectFileListener: Click2<ResultMedia, Boolean>? = null
     var onSelectMediaListener: Click2<ResultMedia, ImageView>? = null
+    var maxSelect: Int = 5
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -89,13 +90,23 @@ class PickMediaAdapter : BaseListAdapter<ResultMedia, RecyclerView.ViewHolder>(D
                 unselect()
             }
             binding.root.setOnSafeClickListener {
-                onSelectMediaListener?.invoke(obj, binding.imageView)
+                // onSelectMediaListener?.invoke(obj, binding.imageView)
+                if (!isSelect) {
+                    select(selectedListResultMedia.size + 1)
+                    if (selectedListResultMedia.size + 1 <= maxSelect)
+                        onSelectFileListener?.invoke(obj, true)
+                } else {
+                    unselect()
+                    onSelectFileListener?.invoke(obj, false)
+                }
+                notifyDataSetChanged()
             }
 
             binding.btnRadio.setOnSafeClickListener {
                 if (!isSelect) {
                     select(selectedListResultMedia.size + 1)
-                    onSelectFileListener?.invoke(obj, true)
+                    if (selectedListResultMedia.size + 1 <= maxSelect)
+                        onSelectFileListener?.invoke(obj, true)
                 } else {
                     unselect()
                     onSelectFileListener?.invoke(obj, false)

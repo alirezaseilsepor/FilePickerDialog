@@ -51,6 +51,7 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
     private var cameraFileCompat: FileCompat? = null
     var isEnableCamera = true
     var isMultiSelect = false
+    var maxSelect = 5
     var onSelectFileListener: Click<ArrayList<ResultMedia>>? = null
     var onCancelListener: SimpleClick? = null
     var isCompress = false
@@ -183,6 +184,7 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
 
     private fun showMedia() {
         val adapter = PickMediaAdapter()
+        adapter.maxSelect = maxSelect
         adapter.selectedListResultMedia = selectedListResultMedia
         adapter.onClickCameraListener = {
             requestCameraPermission {
@@ -443,6 +445,7 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
         private var onCancelListener: SimpleClick? = null
         private var isEnableCamera = true
         private var isMultiSelect = false
+        private var maxSelect = 5
         private var compressQuality = 70
         private var isCompress = false
         private var isEnableCrop = false
@@ -465,8 +468,9 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
         }
 
 
-        fun setMultiSelect(isMultiSelect: Boolean): Builder {
+        fun setMultiSelect(isMultiSelect: Boolean, maxSelect: Int): Builder {
             this.isMultiSelect = isMultiSelect
+            this.maxSelect = maxSelect
             return this
         }
 
@@ -500,6 +504,7 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
             val filePickerDialog = FilePickerDialog()
             filePickerDialog.isEnableCamera = isEnableCamera
             filePickerDialog.isMultiSelect = isMultiSelect
+            filePickerDialog.maxSelect = maxSelect
             filePickerDialog.isCompress = isCompress
             filePickerDialog.compressQuality = compressQuality
             filePickerDialog.isEnableCrop = isEnableCrop
