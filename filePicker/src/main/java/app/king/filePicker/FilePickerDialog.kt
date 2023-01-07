@@ -468,9 +468,9 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
         }
 
 
-        fun setMultiSelect(isMultiSelect: Boolean, maxSelect: Int): Builder {
+        fun setMultiSelect(isMultiSelect: Boolean, maxSelectTemp: Int = maxSelect): Builder {
             this.isMultiSelect = isMultiSelect
-            this.maxSelect = maxSelect
+            this.maxSelect = maxSelectTemp
             return this
         }
 

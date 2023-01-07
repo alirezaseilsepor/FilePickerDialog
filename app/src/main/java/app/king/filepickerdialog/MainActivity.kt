@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         ApplicationStarter.initialize(this, false)
 
         FilePickerDialog.Builder()
-            .setMultiSelect(true,3)
+            //.setMultiSelect(true,3)
             .setEnableCamera(false)
             .setCompress(true, 100)
             .setEnableCrop(true, CropImageOptions())
