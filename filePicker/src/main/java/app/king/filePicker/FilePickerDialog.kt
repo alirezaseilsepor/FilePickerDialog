@@ -49,6 +49,7 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
     private val resultFolderList = arrayListOf<String>()
     private var selectedListResultMedia = arrayListOf<ResultMedia>()
     private var cameraFileCompat: FileCompat? = null
+    var isEnableCamera = true
     var isMultiSelect = false
     var onSelectFileListener: Click<ArrayList<ResultMedia>>? = null
     var onCancelListener: SimpleClick? = null
@@ -184,7 +185,9 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
         val adapter = PickMediaAdapter()
         adapter.selectedListResultMedia = selectedListResultMedia
         adapter.onClickCameraListener = {
-            openCamera()
+            requestCameraPermission {
+                openCamera()
+            }
         }
         adapter.onSelectFileListener = { resultMedia, isSelect ->
             if (isMultiSelect)
@@ -249,7 +252,8 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
 
     private fun getListMediaAdapter(list: List<ResultMedia>): List<ResultMedia> {
         val result = arrayListOf<ResultMedia>()
-        result.add(ResultMedia(-1, "", "0", 0, "", "", ""))
+        if (isEnableCamera)
+            result.add(ResultMedia(-1, "", "0", 0, "", "", ""))
         result.addAll(list)
         return result
     }
@@ -298,6 +302,32 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
     private fun requestStoragePermission(action: (Boolean) -> Unit) {
         val permissionX =
             PermissionX.init(this)!!.permissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        permissionX
+            .onExplainRequestReason { scope, deniedList ->
+                scope.showRequestReasonDialog(
+                    deniedList,
+                    getString(R.string.permission_request_title),
+                    getString(R.string.ok),
+                    getString(R.string.cancel)
+                )
+            }
+            .onForwardToSettings { scope, deniedList ->
+                scope.showForwardToSettingsDialog(
+                    deniedList,
+                    getString(R.string.permission_forward_setting),
+                    getString(R.string.ok),
+                    getString(R.string.cancel)
+                )
+            }
+        permissionX
+            .request { allGranted, _, _ ->
+                action.invoke(allGranted)
+            }
+    }
+
+    private fun requestCameraPermission(action: (Boolean) -> Unit) {
+        val permissionX =
+            PermissionX.init(this)!!.permissions(Manifest.permission.CAMERA)
         permissionX
             .onExplainRequestReason { scope, deniedList ->
                 scope.showRequestReasonDialog(
@@ -403,8 +433,6 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
     }
 
 
-
-
     class Builder() {
         constructor(init: Builder.() -> Unit) : this() {
             init()
@@ -413,12 +441,18 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
         private var onMultiSelectFileListener: Click<ArrayList<ResultMedia>>? = null
         private var onSingleSelectFileListener: Click<ResultMedia>? = null
         private var onCancelListener: SimpleClick? = null
+        private var isEnableCamera = true
         private var isMultiSelect = false
         private var compressQuality = 70
         private var isCompress = false
         private var isEnableCrop = false
-        private var cropImageOptions : CropImageOptions = CropImageOptions()
+        private var cropImageOptions: CropImageOptions = CropImageOptions()
 
+
+        fun setEnableCamera(isEnableCamera: Boolean): Builder {
+            this.isEnableCamera = isEnableCamera
+            return this
+        }
 
         fun setSingleSelectListener(listener: Click<ResultMedia>?): Builder {
             this.onSingleSelectFileListener = listener
@@ -464,6 +498,7 @@ class FilePickerDialog : BaseBottomSheetDialogFragment<DialogMediaPickBinding>()
 
         fun build(): FilePickerDialog {
             val filePickerDialog = FilePickerDialog()
+            filePickerDialog.isEnableCamera = isEnableCamera
             filePickerDialog.isMultiSelect = isMultiSelect
             filePickerDialog.isCompress = isCompress
             filePickerDialog.compressQuality = compressQuality

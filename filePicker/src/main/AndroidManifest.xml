@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="app.king.filePicker">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application>
         <activity
             android:name=".CropActivity"
